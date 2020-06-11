@@ -1,0 +1,44 @@
+# DataBase config
+# --------------------------------------------------------------------
+dbs:
+  Redis:
+    host: redis.bifund.local
+    port: 6379
+  ExchangeRead:
+    host: postgres.read
+    port: 5432
+    dbname: fund
+    username: postgres
+    password: 123456
+    maxidleconns: 4
+    maxopenconns: 8
+  ExchangeWrite:
+    host: postgres.write
+    port: 5432
+    dbname: fund
+    username: postgres
+    password: 123456
+    maxidleconns: 4
+    maxopenconns: 8
+
+# Session configs
+sessionconf:
+  1.0.0:
+    key: 5ffF03b858D5Fd16
+    timeout: 7200000000000
+  1:
+    key: 5ffF03b858D5Fd16
+    timeout: 7200000000000
+  1.0:
+    key: 5ffF03b858D5Fd16
+    timeout: 7200000000000
+  1.1001:
+    key: 5ffF03b858D5Fd16
+    timeout: 7200000000000
+  1.1007:
+    key: 5ffF03b858D5Fd16
+    timeout: 7200000000000
+
+necconf:
+  captchid: be46dd93dace4902946503549eeda729
+  captchapi: http://c.dun.163yun.com/api/v2/verify

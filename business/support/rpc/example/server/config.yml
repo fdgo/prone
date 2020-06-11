@@ -1,0 +1,115 @@
+# DataBase config
+# --------------------------------------------------------------------
+dbs:
+  Redis:
+    host: 192.168.1.235
+    port: 6379
+  ExchangeRead:
+    host: 192.168.1.235
+    port: 5432
+    dbname: exchange
+    username: root
+    password: Wans198059
+    maxidleconns: 4
+    maxopenconns: 8
+  ExchangeWrite:
+    host: 192.168.1.235
+    port: 5432
+    dbname: exchange
+    username: root
+    password: Wans198059
+    maxidleconns: 4
+    maxopenconns: 8
+  QuotesRead:
+    host: 192.168.1.235
+    port: 5432
+    dbname: quotes
+    username: root
+    password: Wans198059
+    maxIdleConns: 4
+    maxOpenConns: 8
+  QuotesWrite:
+    host: 192.168.1.235
+    port: 5432
+    dbname: quotes
+    username: root
+    password: Wans198059
+    maxIdleConns: 4
+    maxOpenConns: 8
+  SpotsRead:
+    host: 192.168.1.235
+    port: 5432
+    dbname: spots
+    username: root
+    password: Wans198059
+    maxidleconns: 4
+    maxopenconns: 8
+  SpotsWrite:
+    host: 192.168.1.235
+    port: 5432
+    dbname: spots
+    username: root
+    password: Wans198059
+    maxidleconns: 4
+    maxopenconns: 8
+
+# message queue config
+mqconf:
+  host: 192.168.1.235
+  port: 11300
+  network: tcp
+
+consuls:
+  - 192.168.1.235:8500
+
+
+# Services config
+# --------------------------------------------------------------------
+#
+services:
+  IFAccount:
+    listenaddress: ':8081'
+  IFMarket:
+    listenaddress: ':8082'
+  IFQuotes:
+    listenaddress: ':8083'
+  UserCenter:
+    listenaddress: ':8085'
+  Bank:
+    listenaddress: ':8086'
+    ethereumnetwork: ropsten
+    etherscanapikey: key
+    pubkey: '0xE6B835eD42c54D48A8Ef4FFee5d2a40c4209cB20'
+    prikey: '8ccced7682da5ca8d94d6f96ecc822ee5b32db047a9e28a51308178ad95ad0e1'
+  DataCenter:
+    listenaddress: ':8087'
+  OrderCenter:
+    listenaddress: ':8088'
+  QuoteCenter:
+    listenaddress: ':8089'
+
+# Common conifg
+# --------------------------------------------------------------------
+# Exchange suport tokens
+suporttokens:
+  '0x86fa049857e0209aa7d9e616f7eb3b3b78ecfdb0': EOS
+  '0x21530a27e2be1f4e77171503d5255b8757a852a5': bifund
+  '0x4ba724838eb60b2c2eb823131d2d4b7f78a4c5a1': BBC
+  '0x1e806bb7c2625f0c3da1d8177de06c177edeedbd': BBV
+
+# Session configs
+sessionconf:
+  1.0.0:
+    key: 5ffF03b858D5Fd16
+    timeout: 1000000000000000
+  1:
+    key: 5ffF03b858D5Fd16
+    timeout: 1000000000000000
+  1.0:
+    key: 5ffF03b858D5Fd16
+    timeout: 1000000000000000
+
+# The coin Precision
+precision: 1000000000
+
+adminuserid: 88888888

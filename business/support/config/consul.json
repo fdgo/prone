@@ -1,0 +1,20 @@
+{
+  "datacenter": "dc1",
+  "data_dir": "/data/opt/consul/data",
+  "log_level": "INFO",
+  "node_name": "node02",
+  "server": true,
+  "ui": true,
+  "bootstrap_expect": 1,
+  "bind_addr": "0.0.0.0",
+  "client_addr": "0.0.0.0",
+  "retry_join": [
+    "engine01.local",
+    "engine03.local"
+  ],
+  "retry_interval": "3s",
+  "raft_protocol": 3,
+  "enable_debug": false,
+  "rejoin_after_leave": true,
+  "enable_syslog": false
+}

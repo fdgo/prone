@@ -1,0 +1,129 @@
+﻿数据库命名规范
+1.对象名称    mc_userdb
+2.表名       user_account   临时表： tmp_2018-05-21  备份表： bak_2018-05-21
+
+CREATE TABLE customer_inf(
+	customer_inf_id int unsigned AUTO_INCREMENT not null comment '自增主键',
+	customer_id int unsigned not null comment 'customer_login表的自增ID',
+	customer_name varchar(64) not null comment '用户真实姓名',
+	identity_card_type tinyint not null default 1 comment '证件类型：1.驾驶证,2.身份证',
+	identity_card_no varchar(64) comment '证件号码',
+)
+
+
+CREATE TABLE order_master(
+	order_master_id int unsigned not null AUTO_INCREMENT comment '订单ID',
+	order_sn bigint unsigned not null comment '订单编号 yysssxxx',
+	customer_id int unsigned not null comment '下单人ID',
+	shipping_user varchar(64) not null comment '收货人姓名',
+	province SMALLINT not null comment '收货人所在省',
+)
+
+a.尽量控制单表数据量的大小，建议在500万行之内(取决存储设备)
+b.谨慎使用mysql分区表, 分区表在物理上表现为多个文件，在逻辑上表现一个表
+c.尽量做到热冷数据分离,减小表的宽度
+d.每个表最多4096列,每一行不能超过65535字节,因为表宽的话，在加载表中数据到内存缓冲池的时候
+内存消耗越大,同时消耗更多磁盘IO。如果表不宽的话，能保证热数据的内存缓存命中率
+e.对表的列进行拆分,经常使用的一个列放入一个表中
+f.禁止在表中建立预留字段
+g.禁止存放图片，文件等二进制数据
+h.禁止在线上做数据库压力测试
+i.禁止从开发环境，测试环境直接连生产数据库
+j.不要滥用索引, 单张表索引不超过5个
+k.Innordb 是按照哪个索引的顺序来组织表的呢。--主键    每个Innodb表必须有一个主键
+如果没有创建，mysql为自动创建第一个非空唯一字段作为索引。主键选择，尽量是不经常更新的列，不使用多列联合作为主键, 不使用uuid  md5  hash, 字符串作为主键(因为顺序不明确)
+哪些列做主键-- 经常出现在select update  delete 语句的where 从句中的列包含在order by, group by, distinct中的字段
+多表join的关联列
+l.索引选择顺序，从左到右，区分度最高的列放在联合索引的最左侧。
+m.尽量把字段长度小的列放在联合索引的最左侧
+n.使用最频繁的列放到联合索引的左侧
+o.避免使用冗余重复索引  [primary key(id)   index(id)    unique index(id) 重复了]----[index(a,b,c) index(a,b), index(a) 冗余了]
+p.覆盖索引： 就是包含了所有查询字段的索引, 覆盖索引好处：避免Innodb表进行索引的二次查找, 可以把随机IO变为顺序IO加快查询效率(顺序IO快)
+q.不建议使用外键约束，但一定在表与表之间的关联键上建立索引,  外键可用于保证数据的参照完整性，但建议在业务端实现
+
+
+
+优先选择符合存储需要的最小的数据类型
+a.将字符串转化为数字类型存储  
+  INET_ATON ('255.255.255.255') = 4294967295
+  INET_NTOA (4294967295) = '255.255.255.255'
+b.无符号相对于有符合可以多出一倍的存储空间
+  SIGNED INT -2147483648 ~ 2147483647
+  UNSIGNED INT 0 ~ 4294967295
+
+varchar(255) 表示的是字符，不是字节
+
+
+
+数据库权限设计:
+
+	数据库信息表:  table_kind            1. dev   2. test  3. produce
+	申请人信息表:  applicant_info        
+	申请人部门表:  applicant_department
+
+
+
+
+用户信息表:  ID, 姓名, 年龄, 性别, 职位, 联系方式
+
+项目信息表:    ID, 项目名称,  项目负责人,  项目开始时间,  预估结束时间，  项目结束时间
+
+部门信息表:    ID, 部门名称
+
+员工和项目和部门关系表:  项目名称， 员工姓名
+
+
+数据库信息表： ID, 数据库名称， 数据库种类,  数据库性质,  数据库ip地址
+
+
+
+CREATE TABLE user_inf(
+	user_id  			    int unsigned AUTO_INCREMENT not null comment '自增主键',
+	user_name     			varchar(16) not null comment '用户姓名',
+	user_age      			int unsigned not null  comment '用户年龄',
+	user_gender   			tinyint not null comment '用户性别',
+	user_positon  			varchar(32) not null comment '用户职位',
+	user_contactway         varchar(64) not null comment '用户联系方式',
+)  ENGINE= InnoDB DEFAULT CHARSET=utf8mb4 comment '用户信息表';
+
+
+CREATE TABLE project_inf(
+	project_id              int unsigned AUTO_INCREMENT not null comment '自增主键',
+	project_name            varchar(32) not null comment '项目名称',
+	project_leader			varchar(32) not null comment '项目负责人',
+	project_begintime       timestamp(0) not null  COMMENT '开始时间',
+	project_estimated_endtime   timestamp(0) not null  COMMENT '预估结束时间',
+	project_real_endtime         timestamp(0) not null  COMMENT '真实结束时间',
+	update_time        timestamp(0) not null DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '自动更新时间',
+)	ENGINE= InnoDB DEFAULT CHARSET=utf8mb4 comment '项目信息表';
+
+
+
+
+CREATE TABLE department_inf(
+	department_id                 int unsigned AUTO_INCREMENT not null comment '自增主键',
+	department_name               varchar(32) not null comment '项目名称',
+	department_leader			  varchar(32) not null comment '项目负责人',
+)	ENGINE= InnoDB DEFAULT CHARSET=utf8mb4 comment '项目信息表';
+
+
+CREATE TABLE database_inf(
+	database_id		            int unsigned AUTO_INCREMENT not null comment '自增主键',
+	database_kind   			tinyint not null comment '数据库种类',
+	database_property 			tinyint not null comment '数据库性质',
+	database_ip 			    varchar(32) not null comment '数据库IP',
+)
+
+ 使用人信息， 登录用户名， 登录密码，  使用权限，  授权开始时间，  周期
+
+
+CREATE TABLE database_user(
+	database_id        int unsigned AUTO_INCREMENT not null comment '自增主键',
+	user_id            int unsigned  not null comment '用户ID',
+	login_account      varchar(32) not null comment '登录账号',
+	login_pwd          varchar(32) not null comment '登录密码',
+	auth_class         tinyint not null comment '授权等级',
+	auth_begintime     timestamp(0) not null comment '数据库IP',
+	auth_endtime       timestamp(0) not null comment '数据库IP',
+	update_time        timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '自动更新时间',
+)

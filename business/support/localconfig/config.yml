@@ -1,0 +1,7 @@
+services:
+  Config:
+    rpcaddress: 'engine01.bifund.local:9103'
+consuls:
+  - redis.bifund.local:8500
+loglevel: info
+ip: engine01.bifund.local
