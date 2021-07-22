@@ -22,7 +22,6 @@ require (
 	github.com/go-openapi/swag v0.19.9 // indirect
 	github.com/go-redis/redis v6.15.7+incompatible
 	github.com/go-redis/redis_rate v6.5.0+incompatible
-	github.com/go-sql-driver/mysql v1.5.0 // indirect
 	github.com/golang/protobuf v1.4.1 // indirect
 	github.com/google/gops v0.3.8
 	github.com/google/uuid v1.1.1
@@ -42,14 +41,14 @@ require (
 	github.com/onsi/gomega v1.10.0 // indirect
 	github.com/pkg/errors v0.9.1
 	github.com/sirupsen/logrus v1.6.0
-	github.com/stretchr/testify v1.5.1
+	github.com/stretchr/testify v1.6.1
 	github.com/swaggo/gin-swagger v1.2.0
 	github.com/swaggo/swag v1.6.5
 	github.com/tidwall/buntdb v1.1.2
 	github.com/tidwall/gjson v1.6.0 // indirect
 	github.com/tidwall/pretty v1.0.1 // indirect
 	github.com/urfave/cli/v2 v2.2.0
-	go.mongodb.org/mongo-driver v1.3.3
+	go.mongodb.org/mongo-driver v1.5.1
 	golang.org/x/crypto v0.0.0-20200510223506-06a226fb4e37 // indirect
 	golang.org/x/net v0.0.0-20200506145744-7e3656a0809f // indirect
 	golang.org/x/sync v0.0.0-20200317015054-43a5402ce75a // indirect
