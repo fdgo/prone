@@ -9,7 +9,8 @@ require (
 	github.com/aws/aws-sdk-go v1.31.7
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/dchest/captcha v0.0.0-20170622155422-6a29415a8364
-	github.com/ethereum/go-ethereum v1.9.14
+	github.com/elastic/gosigar v0.8.1-0.20180330100440-37f05ff46ffa // indirect
+	github.com/ethereum/go-ethereum v1.9.25
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/go-redis/redis v6.15.8+incompatible
 	github.com/gorilla/handlers v1.4.2
