@@ -9,11 +9,11 @@ require (
 	github.com/aws/aws-sdk-go v1.31.7
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/dchest/captcha v0.0.0-20170622155422-6a29415a8364
-	github.com/ethereum/go-ethereum v1.9.14
+	github.com/ethereum/go-ethereum v1.10.17
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/go-redis/redis v6.15.8+incompatible
 	github.com/gorilla/handlers v1.4.2
-	github.com/gorilla/mux v1.7.4
+	github.com/gorilla/mux v1.8.0
 	github.com/gorilla/securecookie v1.1.1
 	github.com/gorilla/sessions v1.2.0
 	github.com/jinzhu/configor v1.2.0
@@ -24,5 +24,5 @@ require (
 	github.com/shopspring/decimal v1.2.0
 	github.com/smallnest/rpcx v0.0.0-20200522154920-57cd85a3467c
 	github.com/tealeg/xlsx v1.0.5
-	golang.org/x/time v0.0.0-20200416051211-89c76fbcd5d1
+	golang.org/x/time v0.0.0-20210220033141-f8bda1e9f3ba
 )
