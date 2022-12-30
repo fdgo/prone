@@ -6,7 +6,7 @@ require (
 	github.com/Masterminds/squirrel v1.4.0
 	github.com/Tomasen/realip v0.0.0-20180522021738-f0c99a92ddce
 	github.com/aliyun/aliyun-oss-go-sdk v2.1.0+incompatible
-	github.com/aws/aws-sdk-go v1.31.7
+	github.com/aws/aws-sdk-go v1.33.0
 	github.com/baiyubin/aliyun-sts-go-sdk v0.0.0-20180326062324-cfa1a18b161f // indirect
 	github.com/dchest/captcha v0.0.0-20170622155422-6a29415a8364
 	github.com/ethereum/go-ethereum v1.9.14
